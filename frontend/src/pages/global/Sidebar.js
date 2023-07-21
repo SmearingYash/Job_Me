@@ -46,10 +46,10 @@ const SidebarAdm = () => {
 
                             {
                                 collapsed ?
-                                    <Avatar alt="logo dashboard" src={logoDashboard} /> :
-                                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                                    <Link to={"/"}><Avatar alt="logo dashboard" src={logoDashboard} /></Link>:
+                                    <Link to={"/"}><Box sx={{ display: "flex", justifyContent: "center" }}>
                                         <img style={{ width: "100px", heigth: "100px", textAlign: "center", transition: "all ease-out .5s" }} src={logoDashboard} alt="logo dashboard" />
-                                    </Box>
+                                    </Box> </Link>
                             }
 
                         </Box>

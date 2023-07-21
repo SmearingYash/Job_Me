@@ -16,18 +16,24 @@ const SingleJob = () => {
     const { palette } = useTheme();
     const dispatch = useDispatch();
     const { singleJob, loading } = useSelector(state => state.singleJob)
+    const {userInfo} = useSelector(state=>state.signIn)
     const { id } = useParams();
     useEffect(() => {
         dispatch(jobLoadSingleAction(id));
     }, [id]);
 
     const applyForAJob = () => {
-        dispatch(userApplyJobAction({
-            title: singleJob && singleJob.title,
-            description: singleJob && singleJob.description,
-            salary: singleJob && singleJob.salary,
-            location: singleJob && singleJob.location
-        }))
+        if(userInfo && userInfo.success){
+            dispatch(userApplyJobAction({
+                title: singleJob && singleJob.title,
+                description: singleJob && singleJob.description,
+                salary: singleJob && singleJob.salary,
+                location: singleJob && singleJob.location
+            }))
+        }else{
+            alert("please log in")
+        }
+        
     }
 
     return (
@@ -54,7 +60,7 @@ const SingleJob = () => {
                                                     {singleJob && singleJob.title}
                                                 </Typography>
                                                 <Typography variant="body2">
-                                                    <Box component="span" sx={{ fontWeight: 700 }}>Salary</Box>: ${singleJob && singleJob.salary}
+                                                    <Box component="span" sx={{ fontWeight: 700 }}>Labour Fee</Box>: ${singleJob && singleJob.salary}
                                                 </Typography>
                                                 <Typography variant="body2">
                                                     <Box component="span" sx={{ fontWeight: 700 }}>Category</Box>: {singleJob && singleJob.jobType ? singleJob.jobType.jobTypeName : "No category"}
@@ -72,7 +78,7 @@ const SingleJob = () => {
                             </Box>
                             <Box sx={{ flex: 1, p: 2 }}>
                                 <Card sx={{ p: 2, bgcolor: palette.primary.white }}>
-                                    <Button onClick={applyForAJob} sx={{ fontSize: "13px" }} variant='contained'>Applied for this Job</Button>
+                                    <Button onClick={applyForAJob} sx={{ fontSize: "13px" }} variant='contained'>Request For {singleJob && singleJob.title}</Button>
                                 </Card>
                             </Box>
 
