@@ -23,6 +23,12 @@ const validationSchema = yup.object({
         .string('Enter your email')
         .email('Enter a valid email')
         .required('Email is required'),
+    phone: yup
+        .string("Enter phone number")
+        .matches(/^\d+$/, "Invalid phone number")
+        .min(10, "Phone number must be at least 10 digits")
+        .max(10, "Phone number can have at most 10 digits")
+        .required("Phone number is required"),
     password: yup
         .string('Enter your password')
         .min(8, 'Password should be of minimum 8 characters length')
@@ -40,7 +46,8 @@ const Register = () => {
             firstName: '',
             lastName: '',
             email: '',
-            password: ''
+            password: '',
+            phone:''
         },
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
@@ -107,6 +114,29 @@ const Register = () => {
                             onBlur={formik.handleBlur}
                             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                             helperText={formik.touched.lastName && formik.errors.lastName}
+                        />
+                        <TextField
+                            sx={{
+                                mb: 3,
+                                "& .MuiInputBase-root": {
+                                    color: 'text.secondary',
+                                },
+                                fieldset: { borderColor: "rgb(231, 235, 240)" }
+                            }}
+                            fullWidth
+                            id="phone"
+                            label="Phone Number"
+                            name='phone'
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+
+                            placeholder="Phone Number"
+                            value={formik.values.phone}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.phone && Boolean(formik.errors.phone)}
+                            helperText={formik.touched.phone && formik.errors.phone}
                         />
                         <TextField
                             sx={{

@@ -68,6 +68,12 @@ const userSchema = new mongoose.Schema({
             'Please add a valid email'
         ]
     },
+    phone:{
+        type: Number,
+        trim: true,
+        required: [true, 'Phone is required'],
+        minlength: [10, 'phone must have at least (10) caracters'],
+    },
     password: {
         type: String,
         trim: true,

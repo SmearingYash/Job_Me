@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.job_request_card{
+  min-width: 50vw;
+  min-height: 20vh;
+  background: white;
+}

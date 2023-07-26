@@ -107,6 +107,7 @@ export const allUserAction = () => async (dispatch) => {
     dispatch({ type: ALL_USER_LOAD_REQUEST });
     try {
         const { data } = await axios.get("/api/allusers");
+        console.log(data)
         dispatch({
             type: ALL_USER_LOAD_SUCCESS,
             payload: data
